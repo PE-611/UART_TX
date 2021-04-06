@@ -1,0 +1,33 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "UART_clk",
+					"strict" : false
+				},
+				{
+					"name" : "Tx_out",
+					"strict" : false
+				},
+				{
+					"name" : "start_tx_flag",
+					"strict" : false
+				},
+				{
+					"name" : "tx_launch",
+					"strict" : false
+				},
+				{
+					"name" : "clk_Tx",
+					"strict" : false
+				},
+				{
+					"name" : "TX_LAUNCH",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
