@@ -1,15 +1,15 @@
-Fitter Status : Successful - Mon Apr 05 16:35:55 2021
+Fitter Status : Successful - Wed Nov 10 11:30:57 2021
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : UART_Tx
 Top-level Entity Name : UART_Tx
 Family : MAX 10
 Device : 10M08SAE144C8G
 Timing Models : Final
-Total logic elements : 89 / 8,064 ( 1 % )
-    Total combinational functions : 88 / 8,064 ( 1 % )
-    Dedicated logic registers : 44 / 8,064 ( < 1 % )
-Total registers : 44
-Total pins : 14 / 101 ( 14 % )
+Total logic elements : 58 / 8,064 ( < 1 % )
+    Total combinational functions : 58 / 8,064 ( < 1 % )
+    Dedicated logic registers : 40 / 8,064 ( < 1 % )
+Total registers : 40
+Total pins : 13 / 101 ( 13 % )
 Total virtual pins : 0
 Total memory bits : 0 / 387,072 ( 0 % )
 Embedded Multiplier 9-bit elements : 0 / 48 ( 0 % )

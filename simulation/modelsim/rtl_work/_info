@@ -1,0 +1,55 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim
+vUART_Tx
+!s110 1636463640
+!i10b 1
+!s100 LllB_BllKcFn4XVC9b9?W1
+I4h?F^@MzP[cQlCLk2`j2L0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1636463631
+8C:/intelFPGA_lite/18.1/Projects/UART_Tx/UART_Tx.v
+FC:/intelFPGA_lite/18.1/Projects/UART_Tx/UART_Tx.v
+L0 9
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1636463640.000000
+!s107 C:/intelFPGA_lite/18.1/Projects/UART_Tx/UART_Tx.v|
+!s90 -reportprogress|300|-work|work|C:/intelFPGA_lite/18.1/Projects/UART_Tx/UART_Tx.v|
+!i113 1
+o-work work
+Z3 tCvgOpt 0
+n@u@a@r@t_@tx
+vUART_Tx_vlg_tst
+!s110 1636463370
+!i10b 1
+!s100 5SL?:G;Hi]nBA6HzzmjE:1
+IiM>LX9PFh^CWo]^bVfdH<2
+R1
+R0
+w1636462862
+8C:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim/UART_Tx.vt
+FC:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim/UART_Tx.vt
+L0 28
+R2
+r1
+!s85 0
+31
+!s108 1636463369.000000
+!s107 C:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim/UART_Tx.vt|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim|C:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim/UART_Tx.vt|
+!i113 1
+o-vlog01compat -work work
+!s92 -vlog01compat -work work +incdir+C:/intelFPGA_lite/18.1/Projects/UART_Tx/simulation/modelsim
+R3
+n@u@a@r@t_@tx_vlg_tst

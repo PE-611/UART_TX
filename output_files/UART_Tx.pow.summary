@@ -1,12 +1,12 @@
-Power Analyzer Status : Successful - Mon Apr 05 16:36:00 2021
+Power Analyzer Status : Successful - Wed Nov 10 11:31:02 2021
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : UART_Tx
 Top-level Entity Name : UART_Tx
 Family : MAX 10
 Device : 10M08SAE144C8G
 Power Models : Final
-Total Thermal Power Dissipation : 116.33 mW
+Total Thermal Power Dissipation : 116.32 mW
 Core Dynamic Thermal Power Dissipation : 0.00 mW
 Core Static Thermal Power Dissipation : 110.61 mW
-I/O Thermal Power Dissipation : 5.72 mW
+I/O Thermal Power Dissipation : 5.71 mW
 Power Estimation Confidence : Low: user provided insufficient toggle rate data

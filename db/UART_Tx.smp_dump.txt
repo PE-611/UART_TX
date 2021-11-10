@@ -1,14 +1,8 @@
 
-State Machine - |UART_Tx|bit_num
-Name bit_num.1111 bit_num.1001 bit_num.1000 bit_num.0111 bit_num.0110 bit_num.0101 bit_num.0100 bit_num.0011 bit_num.0010 bit_num.0001 bit_num.0000 
-bit_num.0000 0 0 0 0 0 0 0 0 0 0 0 
-bit_num.0001 0 0 0 0 0 0 0 0 0 1 1 
-bit_num.0010 0 0 0 0 0 0 0 0 1 0 1 
-bit_num.0011 0 0 0 0 0 0 0 1 0 0 1 
-bit_num.0100 0 0 0 0 0 0 1 0 0 0 1 
-bit_num.0101 0 0 0 0 0 1 0 0 0 0 1 
-bit_num.0110 0 0 0 0 1 0 0 0 0 0 1 
-bit_num.0111 0 0 0 1 0 0 0 0 0 0 1 
-bit_num.1000 0 0 1 0 0 0 0 0 0 0 1 
-bit_num.1001 0 1 0 0 0 0 0 0 0 0 1 
-bit_num.1111 1 0 0 0 0 0 0 0 0 0 1 
+State Machine - |UART_Tx|state
+Name state.DEC_BIT_CNT state.SET_DATA_BIT state.START_BIT state.IDLE state.STOP_TRANSMIT 
+state.IDLE 0 0 0 0 0 
+state.START_BIT 0 0 1 1 0 
+state.SET_DATA_BIT 0 1 0 1 0 
+state.DEC_BIT_CNT 1 0 0 1 0 
+state.STOP_TRANSMIT 0 0 0 1 1 

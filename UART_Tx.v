@@ -4,101 +4,167 @@
 // Company : GSC RF TRINITI										//
 // Description : UART Tx module								  	//
 // Start design : 01.04.2021 										//
-// Last revision : 01.04.2021 									//
+// Last revision : 06.04.2021 									//
 ///////////////////////////////////////////////////////////
-module UART_Tx (input clk_Tx, TX_LAUNCH, 
-					 output reg [7:0] data, 
+module UART_Tx (input clk_Tx, TX_LAUNCH, reset,							// TX_LAUNCH is button or condition for transmit
+					 input [7:0] data_in,
 					 output reg UART_clk,		
-					 output reg	Tx_out, start_tx_flag, tx_launch
+					 output reg	Tx_out                           
 
 					 );
 					 
 parameter Fclk = 100 * 1000000;			
-parameter Fuart = 115200;								 	
-parameter divider	= (Fclk / ((Fuart * 2) - 1)); 
+parameter Fuart = 9600;								 	
+parameter divider	= ((Fclk / ((Fuart * 2) - 1)) * 2); 
+
+reg [7:0] state;	
+reg [7:0] next_state;
+reg [7:0] state_cnt;
 
 
-initial Tx_out <= 1'b1;
+localparam IDLE 							= 8'd0;
+localparam START_BIT						= 8'd1;
+localparam SET_DATA_BIT					= 8'd2;
+localparam DEC_BIT_CNT					= 8'd3;
+localparam STOP_TRANSMIT				= 8'd4;
 
-initial UART_clk <= 1'b0;
 
-reg [12:0]	cnt;
+reg transmit_flg;
+initial transmit_flg <= 1'b0;
+
+
+reg [24:0] cnt;
 initial cnt <= 1'b0;	
 
-reg [20:0] ltb_cnt;
-initial ltb_cnt <= 1'b0;
+reg [7:0] bit_cnt;
+initial bit_cnt <= 8'd0;
+reg [7:0] data_for_transmit;
+initial data_for_transmit <= 8'b01110010;
 
+initial Tx_out <= 1'b1;
+			
+always @* 	
+		
+		case (state)
+			
+			IDLE:
+						
+				
+				if (TX_LAUNCH == 1'b0 && transmit_flg == 1'b0) begin
+					next_state <= START_BIT;
+				end
+				
+				else begin
+					next_state <= IDLE;
+				end
+				
+				
+			START_BIT:	
+			
+				if (cnt == 24'd10416) begin
+					next_state <= SET_DATA_BIT;
+				end
+				
+				else begin
+					next_state <= START_BIT;
+				end
+				
+			SET_DATA_BIT:	
+			
+				if (cnt == 24'd10416) begin
+					next_state <= DEC_BIT_CNT;
+				end
+				
+				else begin
+					next_state <= SET_DATA_BIT;
+				end				
+			
+			DEC_BIT_CNT:
+				
+				if (bit_cnt == 8'd7) begin
+					next_state <= STOP_TRANSMIT;
+				end
+				
+				else begin
+					next_state <= SET_DATA_BIT;
+				end
+			
+			STOP_TRANSMIT:
 
-reg [4:0] bit_cnt;
-initial bit_cnt <= 4'd0;
-
-
-initial data <= 8'd165;
-
-//reg start_tx_flag;
-initial start_tx_flag <= 1'b0;
-
-
-reg ltb;
-initial ltb <= 1'b0;
-
+				if (cnt == 24'd10416) begin
+					next_state <= IDLE;
+				end
+				
+				else begin
+					next_state <= STOP_TRANSMIT;
+				end
+		
+				
+				
+			default:
+				next_state <= IDLE;
+		
+		endcase
+		
+		
 always @(posedge clk_Tx) begin
 	
-	cnt <= cnt + 1'b1;
+	if (TX_LAUNCH == 1'b0) begin
+		transmit_flg <= 1'b1;
+	end
 	
-	if (cnt == divider) begin
-		UART_clk <= ~UART_clk;
+	if (transmit_flg == 1'b1) begin
+		cnt <= cnt + 1'b1;
+	end
+	
+	if (cnt == 24'd10416) begin
 		cnt <= 1'b0;
 	end
-
 	
-	
-		
-end	
-					
-
-always @(posedge UART_clk) begin				 
-	
-	if (TX_LAUNCH == 1'b0 && ltb == 1'b0) begin
-		tx_launch <= 1'b1;
-		ltb = 1'b1;
+	if (state == IDLE) begin
+		cnt <= 1'b0;
+		transmit_flg <= 1'b0;
+		bit_cnt <= 1'b0;
+		Tx_out <= 1'b1;
 	end
 	
-	if (tx_launch == 1'b1) begin
-		tx_launch <= 1'b0;
+	if (state == START_BIT) begin
+		Tx_out <= 1'b0;
 	end
 	
-	if (ltb == 1'b1) begin
-		ltb_cnt <= ltb_cnt + 1'b1;
+	if (state == SET_DATA_BIT) begin
+		Tx_out <= data_for_transmit[bit_cnt];
 	end
 	
-	if (ltb_cnt == 20'd25000) begin
-		ltb <= 1'b0;
-		ltb_cnt <= 1'b0;
-	end
-	
-		
-	
-	if (tx_launch == 1'b1) begin
-		Tx_out <= 1'b0;					//start bit
-		start_tx_flag <= 1'b1;
-	end
-	
-	if (start_tx_flag == 1'b1) begin 
-		Tx_out <= data[bit_cnt];
+	if (state == DEC_BIT_CNT) begin
 		bit_cnt <= bit_cnt + 1'b1;
 	end
 	
-	if (bit_cnt == 4'd7) begin
-		Tx_out <= 1'b1;					// stop_bit
-		start_tx_flag <= 1'b0;
-		bit_cnt <= 4'd0;
+	if (state == STOP_TRANSMIT) begin
+		Tx_out <= 1'b1;
 	end
 	
+	
+	
+end	
 
 
-end
-		
+
+
+always @(posedge clk_Tx or negedge reset) begin 
+	
+	
+	if(!reset) begin
+		state <= IDLE;
+	end
+	
+	else begin
+		state <= next_state;
+	end
+end		
+
+	
+	
 endmodule
 
 

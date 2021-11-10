@@ -85,7 +85,7 @@ RESERVED_INPUT               : 13        :        :                   :         
 RESERVED_INPUT               : 14        :        :                   :         : 1A        :                
 RESERVED_INPUT               : 15        :        :                   :         : 1B        :                
 ~ALTERA_TMS~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 16        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
-RESERVED_INPUT               : 17        :        :                   :         : 1B        :                
+data_in[0]                   : 17        : input  : 2.5 V             :         : 1B        : N              
 ~ALTERA_TCK~ / RESERVED_INPUT : 18        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
 ~ALTERA_TDI~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 19        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
 ~ALTERA_TDO~                 : 20        : output : 2.5 V             :         : 1B        : N              
@@ -96,8 +96,8 @@ RESERVED_INPUT               : 24        :        :                   :         
 TX_LAUNCH                    : 25        : input  : 2.5 V             :         : 1B        : Y              
 clk_Tx                       : 26        : input  : 2.5 V             :         : 2         : Y              
 RESERVED_INPUT               : 27        :        :                   :         : 2         :                
-RESERVED_INPUT               : 28        :        :                   :         : 2         :                
-data[7]                      : 29        : output : 2.5 V             :         : 2         : N              
+reset                        : 28        : input  : 2.5 V             :         : 2         : N              
+RESERVED_INPUT               : 29        :        :                   :         : 2         :                
 RESERVED_INPUT               : 30        :        :                   :         : 2         :                
 VCCIO2                       : 31        : power  :                   : 2.5V    : 2         :                
 RESERVED_INPUT               : 32        :        :                   :         : 2         :                
@@ -120,10 +120,10 @@ RESERVED_INPUT               : 48        :        :                   :         
 VCCIO3                       : 49        : power  :                   : 2.5V    : 3         :                
 RESERVED_INPUT               : 50        :        :                   :         : 3         :                
 VCC_ONE                      : 51        : power  :                   : 3.0V/3.3V :           :                
-data[2]                      : 52        : output : 2.5 V             :         : 3         : N              
+data_in[4]                   : 52        : input  : 2.5 V             :         : 3         : N              
 GND                          : 53        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 54        :        :                   :         : 3         :                
-data[0]                      : 55        : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT               : 55        :        :                   :         : 3         :                
 RESERVED_INPUT               : 56        :        :                   :         : 3         :                
 RESERVED_INPUT               : 57        :        :                   :         : 3         :                
 RESERVED_INPUT               : 58        :        :                   :         : 3         :                
@@ -137,7 +137,7 @@ RESERVED_INPUT               : 65        :        :                   :         
 RESERVED_INPUT               : 66        :        :                   :         : 4         :                
 VCCIO4                       : 67        : power  :                   : 2.5V    : 4         :                
 GND                          : 68        : gnd    :                   :         :           :                
-data[5]                      : 69        : output : 2.5 V             :         : 4         : N              
+data_in[3]                   : 69        : input  : 2.5 V             :         : 4         : N              
 RESERVED_INPUT               : 70        :        :                   :         : 4         :                
 VCCA5                        : 71        : power  :                   : 3.0V/3.3V :           :                
 VCC_ONE                      : 72        : power  :                   : 3.0V/3.3V :           :                
@@ -147,9 +147,9 @@ RESERVED_INPUT               : 75        :        :                   :         
 RESERVED_INPUT               : 76        :        :                   :         : 5         :                
 RESERVED_INPUT               : 77        :        :                   :         : 5         :                
 RESERVED_INPUT               : 78        :        :                   :         : 5         :                
-RESERVED_INPUT               : 79        :        :                   :         : 5         :                
-start_tx_flag                : 80        : output : 2.5 V             :         : 5         : Y              
-tx_launch                    : 81        : output : 2.5 V             :         : 5         : Y              
+data_in[2]                   : 79        : input  : 2.5 V             :         : 5         : N              
+RESERVED_INPUT               : 80        :        :                   :         : 5         :                
+RESERVED_INPUT               : 81        :        :                   :         : 5         :                
 VCCIO5                       : 82        : power  :                   : 2.5V    : 5         :                
 GND                          : 83        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 84        :        :                   :         : 5         :                
@@ -180,25 +180,25 @@ VCC_ONE                      : 108       : power  :                   : 3.0V/3.3
 VCC_ONE                      : 109       : power  :                   : 3.0V/3.3V :           :                
 RESERVED_INPUT               : 110       :        :                   :         : 7         :                
 RESERVED_INPUT               : 111       :        :                   :         : 7         :                
-data[3]                      : 112       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT               : 112       :        :                   :         : 7         :                
 RESERVED_INPUT               : 113       :        :                   :         : 7         :                
-data[6]                      : 114       : output : 2.5 V             :         : 7         : N              
+data_in[7]                   : 114       : input  : 2.5 V             :         : 7         : N              
 VCC_ONE                      : 115       : power  :                   : 3.0V/3.3V :           :                
 GND                          : 116       : gnd    :                   :         :           :                
 VCCIO7                       : 117       : power  :                   : 2.5V    : 7         :                
 RESERVED_INPUT               : 118       :        :                   :         : 7         :                
 RESERVED_INPUT               : 119       :        :                   :         : 7         :                
-RESERVED_INPUT               : 120       :        :                   :         : 8         :                
+data_in[5]                   : 120       : input  : 2.5 V             :         : 8         : N              
 RESERVED_INPUT               : 121       :        :                   :         : 8         :                
 RESERVED_INPUT               : 122       :        :                   :         : 8         :                
 RESERVED_INPUT               : 123       :        :                   :         : 8         :                
-data[4]                      : 124       : output : 2.5 V             :         : 8         : N              
+RESERVED_INPUT               : 124       :        :                   :         : 8         :                
 GND                          : 125       : gnd    :                   :         :           :                
 ~ALTERA_CONFIG_SEL~ / RESERVED_INPUT : 126       : input  : 2.5 V             :         : 8         : N              
-data[1]                      : 127       : output : 2.5 V             :         : 8         : N              
+data_in[1]                   : 127       : input  : 2.5 V             :         : 8         : N              
 VCCIO8                       : 128       : power  :                   : 2.5V    : 8         :                
 ~ALTERA_nCONFIG~ / RESERVED_INPUT : 129       : input  : 2.5 V Schmitt Trigger :         : 8         : N              
-RESERVED_INPUT               : 130       :        :                   :         : 8         :                
+data_in[6]                   : 130       : input  : 2.5 V             :         : 8         : N              
 RESERVED_INPUT               : 131       :        :                   :         : 8         :                
 RESERVED_INPUT               : 132       :        :                   :         : 8         :                
 GND                          : 133       : gnd    :                   :         :           :                
