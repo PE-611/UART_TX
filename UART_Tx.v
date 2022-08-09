@@ -4,7 +4,7 @@
 // Company : GSC RF TRINITI										//
 // Description : UART Tx module								  	//
 // Start design : 01.04.2021 										//
-// Last revision : 06.04.2021 									//
+// Last revision : 09.08.2022 									//
 ///////////////////////////////////////////////////////////
 module UART_Tx (input clk_Tx, TX_LAUNCH, reset,							// TX_LAUNCH is button or condition for transmit
 					 input [7:0] data_in,
@@ -13,9 +13,9 @@ module UART_Tx (input clk_Tx, TX_LAUNCH, reset,							// TX_LAUNCH is button or 
 
 					 );
 					 
-parameter Fclk = 100 * 1000000;			
+parameter Fclk = 50 * 1000000;			
 parameter Fuart = 9600;								 	
-parameter divider	= ((Fclk / ((Fuart * 2) - 1)) * 2); 
+parameter divider	= Fclk / Fuart; 
 
 reg [7:0] state;	
 reg [7:0] next_state;
@@ -38,8 +38,9 @@ initial cnt <= 1'b0;
 
 reg [7:0] bit_cnt;
 initial bit_cnt <= 8'd0;
-reg [7:0] data_for_transmit;
-initial data_for_transmit <= 8'b01110010;
+//reg [7:0] data_for_transmit;
+//initial data_for_transmit <= data_in;
+
 
 initial Tx_out <= 1'b1;
 			
@@ -61,7 +62,7 @@ always @*
 				
 			START_BIT:	
 			
-				if (cnt == 24'd10416) begin
+				if (cnt == divider) begin
 					next_state <= SET_DATA_BIT;
 				end
 				
@@ -71,7 +72,7 @@ always @*
 				
 			SET_DATA_BIT:	
 			
-				if (cnt == 24'd10416) begin
+				if (cnt == divider) begin
 					next_state <= DEC_BIT_CNT;
 				end
 				
@@ -91,7 +92,7 @@ always @*
 			
 			STOP_TRANSMIT:
 
-				if (cnt == 24'd10416) begin
+				if (cnt == divider) begin
 					next_state <= IDLE;
 				end
 				
@@ -117,7 +118,7 @@ always @(posedge clk_Tx) begin
 		cnt <= cnt + 1'b1;
 	end
 	
-	if (cnt == 24'd10416) begin
+	if (cnt == divider) begin
 		cnt <= 1'b0;
 	end
 	
@@ -133,7 +134,7 @@ always @(posedge clk_Tx) begin
 	end
 	
 	if (state == SET_DATA_BIT) begin
-		Tx_out <= data_for_transmit[bit_cnt];
+		Tx_out <= data_in[bit_cnt];
 	end
 	
 	if (state == DEC_BIT_CNT) begin
